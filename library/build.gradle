@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
@@ -24,6 +26,14 @@ android {
 
 }
 
+kapt {
+    generateStubs = true
+}
+kotlin {
+    experimental {
+        coroutines 'enable'
+    }
+}
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -31,4 +41,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:1.1.51"
+    /**
+     * Support Design Library for android.support.design.widget.AppBarLayout access
+     */
+    compile 'com.android.support:design:26.1.0'
 }
