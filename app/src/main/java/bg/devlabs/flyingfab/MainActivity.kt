@@ -28,8 +28,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupFlyingFab() {
         FlyingFab()
-//              you can also set another interpolator
-//              .setInterpolator(BounceInterpolator())
+//              you can also set interpolator
+//              .interpolator(BounceInterpolator())
+//              you can also set animation duration
+//              .animationDuration(200L)
                 .setup(app_bar_layout, fab_1)
     }
 
