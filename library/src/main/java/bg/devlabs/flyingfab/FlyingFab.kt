@@ -8,6 +8,7 @@ import android.util.DisplayMetrics
 import android.view.View
 import android.view.ViewPropertyAnimator
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.LinearInterpolator
 
 @Suppress("unused")
 /**
@@ -26,7 +27,7 @@ import android.view.animation.AccelerateDecelerateInterpolator
 class FlyingFab {
     private var interpolator: TimeInterpolator = AccelerateDecelerateInterpolator()
 
-    @Suppress( "unused", "RedundantVisibilityModifier")
+    @Suppress("unused", "RedundantVisibilityModifier")
     public fun setup(appBarLayout: AppBarLayout, fab: FloatingActionButton) {
         val mListener = object : AppBarStateChangeListener() {
 
@@ -55,9 +56,26 @@ class FlyingFab {
         appBarLayout.addOnOffsetChangedListener(mListener)
     }
 
+    /**
+     * Sets the interpolator for the underlying animator that animates the requested properties.
+     * By default, the animator uses the default AccelerateDecelerateInterpolator interpolator.
+     * Calling this method will cause the declared object to be used instead.
+     *
+     * @param interpolator The TimeInterpolator to be used for ensuing property animations. A value
+     * of <code>null</code> will result in linear interpolation.
+     * @return This object, allowing calls to methods in this class to be chained.
+     *
+     * Known Indirect Subclasses of TimeInterpolator:
+     * AccelerateDecelerateInterpolator,AccelerateInterpolator,
+     * AnticipateInterpolator,AnticipateOvershootInterpolator,
+     * BaseInterpolator,BounceInterpolator,CycleInterpolator,
+     * DecelerateInterpolator,FastOutLinearInInterpolator,
+     * FastOutSlowInInterpolator,Interpolator,LinearInterpolator,
+     * LinearOutSlowInInterpolator,OvershootInterpolator,PathInterpolator
+     */
     @Suppress("unused", "RedundantVisibilityModifier")
-    public fun setInterpolator(timeInterpolator: TimeInterpolator): FlyingFab {
-        this.interpolator = timeInterpolator
+    public fun setInterpolator(interpolator: TimeInterpolator?): FlyingFab {
+        this.interpolator = interpolator ?: LinearInterpolator()
         return this
     }
 
