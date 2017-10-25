@@ -47,6 +47,11 @@
 
     <include layout="@layout/kittens_content"/>
 
+    <View
+        android:id="@+id/anchor_1"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_1"
         style="@style/Widget.Design.FloatingActionButton"
@@ -57,5 +62,6 @@
         android:visibility="visible"
         app:backgroundTint="@color/colorAccent"
         app:fabSize="normal"
+        app:layout_anchor="@id/anchor_1"
         app:layout_anchorGravity="bottom|right|end"/>
 </android.support.design.widget.CoordinatorLayout>
