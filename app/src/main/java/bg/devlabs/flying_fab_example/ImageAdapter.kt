@@ -12,6 +12,9 @@ import com.bumptech.glide.request.RequestOptions
 /**
  * Created by Simona Stoyanova on 10/25/17.
  * simona@devlabs.bg
+ *
+ * Simple RecyclerView.Adapter which shows Image view
+ * and loads picture in it from url using Glide.
  */
 
 class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {

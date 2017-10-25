@@ -21,7 +21,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_animated_fab)
 
-        setupFlyingFab()
+        FlyingFab()
+                .interpolator(AccelerateDecelerateInterpolator())
+                .animationDuration(800L)
+                .setup(app_bar_layout, fab_1)
 
         //setup the rest of the screen
         toolbar.title = getString(R.string.kittens)
@@ -29,12 +32,6 @@ class MainActivity : AppCompatActivity() {
         loadImage()
     }
 
-    private fun setupFlyingFab() {
-        FlyingFab()
-                .interpolator(AccelerateDecelerateInterpolator())
-                .animationDuration(800L)
-                .setup(app_bar_layout, fab_1)
-    }
 
     private fun loadImage() {
         val options = RequestOptions()
