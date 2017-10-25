@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewPropertyAnimator
 import android.view.animation.AccelerateDecelerateInterpolator
 
+@Suppress("unused")
 /**
  * Created by Simona Stoyanova on 10/25/17.
  * simona@devlabs.bg
@@ -19,7 +20,7 @@ import android.view.animation.AccelerateDecelerateInterpolator
  * Should call setup(appBarLayout: AppBarLayout, fab: FloatingActionButton)
  * in order for the view to be animated
  *
- * @see AppBarStateChangeListener.State
+ * @see AppBarStateChangeListener.AppBarState
  */
 
 class FlyingFab {
