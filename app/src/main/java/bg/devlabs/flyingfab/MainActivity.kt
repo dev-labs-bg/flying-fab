@@ -3,6 +3,7 @@ package bg.devlabs.flyingfab
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.view.animation.AccelerateDecelerateInterpolator
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -28,10 +29,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupFlyingFab() {
         FlyingFab()
-//              you can also set interpolator
-//              .interpolator(BounceInterpolator())
-//              you can also set animation duration
-//              .animationDuration(200L)
+                .interpolator(AccelerateDecelerateInterpolator())
+                .animationDuration(800L)
                 .setup(app_bar_layout, fab_1)
     }
 
@@ -48,8 +47,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupFirstRecyclerView() {
         adapter.images = kittenImages
-        recycler_view.adapter = adapter
-        recycler_view.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,
+        recycler_view?.adapter = adapter
+        recycler_view?.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,
                 false)
     }
 
