@@ -6,4 +6,4 @@
     android:layout_height="240dp"
     android:layout_margin="8dp"
     android:contentDescription="@string/image"
-    tools:background="@color/acent" />
+    tools:background="@color/colorAccent" />

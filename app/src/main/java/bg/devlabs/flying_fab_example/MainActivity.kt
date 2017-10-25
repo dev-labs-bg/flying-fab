@@ -1,14 +1,16 @@
-package bg.devlabs.flyingfab
+package bg.devlabs.flying_fab_example
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.animation.AccelerateDecelerateInterpolator
+import bg.devlabs.flyingfab.FlyingFab
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_animated_fab.*
+import kotlinx.android.synthetic.main.kittens_content.*
 
 class MainActivity : AppCompatActivity() {
     private var adapter = ImageAdapter()

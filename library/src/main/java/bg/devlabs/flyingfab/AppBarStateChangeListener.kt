@@ -31,7 +31,7 @@ abstract class AppBarStateChangeListener : AppBarLayout.OnOffsetChangedListener 
             verticalOffset == 0 -> {
                 /* new state is EXPANDED */
                 if (lastState == AppBarState.MOVING) {
-                    moveButtonTop()
+                    onCollapsed()
                     isButtonTop = true
                 }
                 lastState = AppBarState.EXPANDED
@@ -39,7 +39,7 @@ abstract class AppBarStateChangeListener : AppBarLayout.OnOffsetChangedListener 
             Math.abs(verticalOffset) >= appBarLayout.totalScrollRange -> {
                 /* new state is COLLAPSED */
                 if (lastState == AppBarState.MOVING) {
-                    moveButtonDown()
+                    onExpanded()
                     isButtonTop = false
                 }
                 lastState = AppBarState.COLLAPSED
@@ -49,16 +49,25 @@ abstract class AppBarStateChangeListener : AppBarLayout.OnOffsetChangedListener 
                 if (lastState != AppBarState.COLLAPSED &&
                         Math.abs(verticalOffset) < appBarLayout.totalScrollRange
                         && isButtonTop) {
-                    moveButtonAccordingToOffset(verticalOffset)
+                    onCollapsing(verticalOffset)
                 }
                 lastState = AppBarState.MOVING
             }
         }
     }
 
-    protected abstract fun moveButtonAccordingToOffset(verticalOffset: Int)
+    /**
+     * Called multiple times while the appbar is collapsing.
+     */
+    protected abstract fun onCollapsing(verticalOffset: Int)
 
-    protected abstract fun moveButtonTop()
+    /**
+     * Called once the appbar is fully collapsed.
+     */
+    protected abstract fun onCollapsed()
 
-    protected abstract fun moveButtonDown()
+    /**
+     * Called once the appbar is fully expanded.
+     */
+    protected abstract fun onExpanded()
 }

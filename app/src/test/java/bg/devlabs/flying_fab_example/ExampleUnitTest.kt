@@ -1,4 +1,4 @@
-package bg.devlabs.flyingfab
+package bg.devlabs.flying_fab_example
 
 import org.junit.Test
 
