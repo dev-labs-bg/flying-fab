@@ -1,12 +1,9 @@
 package bg.devlabs.flyingfab
 
 import android.animation.TimeInterpolator
-import android.content.Context
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.FloatingActionButton
-import android.util.DisplayMetrics
 import android.view.View
-import android.view.ViewPropertyAnimator
 import android.view.animation.AccelerateDecelerateInterpolator
 
 @Suppress("unused")
@@ -33,26 +30,38 @@ class FlyingFab {
     public fun setup(appBarLayout: AppBarLayout, fab: FloatingActionButton) {
         val mListener = object : AppBarStateChangeListener() {
 
-            override fun moveButtonAccordingToOffset(verticalOffset: Int) {
+            override fun onCollapsing(verticalOffset: Int) {
+                /**
+                 * The button needs to move alongside with the collapsing appbar
+                 * relatively to the current verticalOffset of the appbar.
+                 */
                 val appBarHeight = appBarLayout.height
                 val fabHeight = fab.height
                 val translateNew = appBarHeight + verticalOffset - fabHeight / 2f
-                animateToY(fab, translateNew, 0, interpolator)
+                animateY(fab, translateNew, 0, interpolator)
             }
 
-            override fun moveButtonTop() {
+            override fun onCollapsed() {
+                /**
+                 * The button needs to move to the bottom right part of the expanded appbar
+                 * and become "anchored" to the collapsing  appbar.
+                 */
                 val appBarHeight = appBarLayout.height
                 val fabHeight = fab.height
                 val translateNew = appBarHeight - fabHeight / 2f
-                animateToY(fab, translateNew, animationDuration, interpolator)
+                animateY(fab, translateNew, animationDuration, interpolator)
             }
 
-            override fun moveButtonDown() {
+            override fun onExpanded() {
+                /**
+                 * The button needs to move to the bottom right part of the screen,
+                 * with 16 dp margin.
+                 */
                 val context = appBarLayout.context
                 val heightPixels = context.resources.displayMetrics.heightPixels
                 val sixteenDpToPixel = convertDpToPixel(16f, context)
                 val translateNew = heightPixels - fab.height - sixteenDpToPixel
-                animateToY(fab, translateNew, animationDuration, interpolator)
+                animateY(fab, translateNew, animationDuration, interpolator)
             }
         }
         appBarLayout.addOnOffsetChangedListener(mListener)
@@ -97,25 +106,22 @@ class FlyingFab {
         return this
     }
 
-    private fun animateToY(fab: View, translateNew: Float, aDuration: Long, interpolator: TimeInterpolator) {
-        fab.animation {
-            y(translateNew)
+    /**
+     * Applies the passed parameters to the view's animation.
+     *
+     * @param view The view to which the animation is applied.
+     * @param translateToY The y value to be animated to.
+     *  @see android.view.ViewPropertyAnimator#y(float)
+     * @param aDuration the duration of the animation.
+     * @param interpolator used only if the animation is not an instant animation (aDuration = 0).
+     */
+    private fun animateY(view: View, translateToY: Float, aDuration: Long, interpolator: TimeInterpolator) {
+        view.animation {
+            y(translateToY)
             duration = aDuration
             if (duration > 0) {
                 this.interpolator = interpolator
             }
-        }
-    }
-
-    fun convertDpToPixel(dp: Float, context: Context): Float {
-        val resources = context.resources
-        val metrics = resources.displayMetrics
-        return dp * (metrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
-    }
-
-    private inline fun View.animation(func: ViewPropertyAnimator.() -> Unit) {
-        this.animate().apply {
-            func()
         }
     }
 }
