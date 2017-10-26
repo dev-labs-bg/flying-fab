@@ -12,6 +12,13 @@ import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_animated_fab.*
 import kotlinx.android.synthetic.main.kittens_content.*
 
+/**
+ * Created by Simona Stoyanova on 10/25/17.
+ * simona@devlabs.bg
+ *
+ * An example activity which illustrates the usage of FlyingFab capabilities.
+ */
+
 class MainActivity : AppCompatActivity() {
     private var adapter = ImageAdapter()
     private val imageUrl = "https://www.carmaa-petadoption.com/wp-content/uploads/" +
