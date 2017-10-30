@@ -15,6 +15,7 @@
 
     <color name="md_orange_A200">#FFAB40</color>
 
+    <color name="md_black_1000_a_100">#96000000</color>
     <color name="md_black_1000">#000000</color>
     <color name="md_white_1000">#ffffff</color>
 </resources>
