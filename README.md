@@ -75,7 +75,7 @@ Samples
 Code samples are available in the app module.
 Here's a sample video:
 
-![Sample Video](path to video)
+[![Sample Video](https://img.youtube.com/vi/Ks1QiTJ3SgQ/0.jpg)](https://www.youtube.com/watch?v=Ks1QiTJ3SgQ)
 
 
 Getting Help
