@@ -3,6 +3,7 @@ package bg.devlabs.flying_fab_example
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.BounceInterpolator
 import bg.devlabs.flyingfab.FlyingFab
 import kotlinx.android.synthetic.main.activity_animated_fab.*
 
@@ -19,8 +20,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_animated_fab)
 
         FlyingFab()
-                .interpolator(AccelerateDecelerateInterpolator())
-                .animationDuration(800L)
+                .interpolatorUp(AccelerateDecelerateInterpolator())
+                .interpolatorDown(BounceInterpolator())
+                .animationDurationUp(500L)
+                .animationDurationDown(1200L)
                 .setup(app_bar_layout, fab_1)
 
         //setup the rest of the screen
