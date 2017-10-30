@@ -75,7 +75,7 @@ Samples
 Code samples are available in the app module.
 Here's a sample video:
 
-[![Sample Video](https://img.youtube.com/vi/Ks1QiTJ3SgQ/0.jpg)](https://www.youtube.com/watch?v=Ks1QiTJ3SgQ)
+![Sample Video](https://github.com/sstoyanova/flying-fab/blob/master/FlyingFabExample.gif)
 
 
 Getting Help
