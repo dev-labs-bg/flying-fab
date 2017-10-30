@@ -2,9 +2,11 @@ package bg.devlabs.flyingfab
 
 import android.animation.TimeInterpolator
 import android.support.design.widget.AppBarLayout
+import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.FloatingActionButton
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
+
 
 @Suppress("unused")
 /**
@@ -46,9 +48,40 @@ class FlyingFab {
     private var animationDurationUp: Long = DEFAULT_ANIMATION_DURATION
     private var animationDurationDown: Long = DEFAULT_ANIMATION_DURATION
 
+    /**
+     * Sets the AppBarStateChangeListener to the @param appBarLayout
+     * and handles animations depending on the AppBarLayout's state change
+     * Handles coordinator layout specific view visibility changes on the @param fab
+     */
     @Suppress("unused", "RedundantVisibilityModifier")
     public fun setup(appBarLayout: AppBarLayout, fab: FloatingActionButton) {
-        val mListener = object : AppBarStateChangeListener() {
+        val mListener = getAppBarStateChangeListener(appBarLayout, fab)
+        disableFabHiding(fab)
+        appBarLayout.addOnOffsetChangedListener(mListener)
+    }
+
+    /**
+     * @return AppBarStateChangeListener which encapsulates the animation logic
+     * relative to each AppBarLayout's state change
+     */
+    private fun getAppBarStateChangeListener(appBarLayout: AppBarLayout, fab: FloatingActionButton):
+            AppBarStateChangeListener {
+        return object : AppBarStateChangeListener() {
+            override fun onExpanding(verticalOffset: Int) {
+                /**
+                 * The button needs to stay to the bottom right part of the screen,
+                 * with 16 dp margin.
+                 *
+                 * Without this it is moving according to the coordinator layout's logic -
+                 * relative to the appbar's offset which is not wanted,
+                 * since the library handles all the buttons animation
+                 */
+                val context = appBarLayout.context
+                val heightPixels = context.resources.displayMetrics.heightPixels
+                val sixteenDpToPixel = convertDpToPixel(16f, context)
+                val translateNew = heightPixels - fab.height - sixteenDpToPixel
+                moveY(fab, translateNew)
+            }
 
             override fun onCollapsing(verticalOffset: Int) {
                 /**
@@ -85,7 +118,17 @@ class FlyingFab {
                 animateY(fab, translateNew, animationDurationDown, interpolatorDown)
             }
         }
-        appBarLayout.addOnOffsetChangedListener(mListener)
+    }
+
+    /**
+     * Sets isAutoHideEnabled to false
+     * so that the fab is not hiding when the appbar collapses
+     */
+    private fun disableFabHiding(fab: FloatingActionButton) {
+        val layoutParams = fab.layoutParams as CoordinatorLayout.LayoutParams
+        val fabBehaviour = FloatingActionButton.Behavior()
+        fabBehaviour.isAutoHideEnabled = false
+        layoutParams.behavior = fabBehaviour
     }
 
     /**

@@ -68,11 +68,18 @@ abstract class AppBarStateChangeListener : AppBarLayout.OnOffsetChangedListener 
                         Math.abs(verticalOffset) < appBarLayout.totalScrollRange
                         && isButtonTop) {
                     onCollapsing(verticalOffset)
+                } else {
+                    onExpanding(verticalOffset)
                 }
                 lastState = AppBarState.MOVING
             }
         }
     }
+
+    /**
+     * Called multiple times while the appbar is expanding.
+     */
+    abstract fun onExpanding(verticalOffset: Int)
 
     /**
      * Called multiple times while the appbar is collapsing.
