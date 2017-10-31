@@ -34,7 +34,7 @@ import android.view.animation.AccelerateDecelerateInterpolator
  * Handles AppBarStateChanges and animates the Floating action button
  * according to the position and the State of the AppBarLayout
  *
- * Can be created like FabAnimationHandler fabh = new FabAnimationHandler()
+ * Can be created like FabAnimationHandler fabHandler = new FabAnimationHandler()
  * Should call setup(appBarLayout: AppBarLayout, fab: FloatingActionButton)
  * in order for the view to be animated
  *
