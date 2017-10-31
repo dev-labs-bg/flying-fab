@@ -68,10 +68,20 @@ FlyingFab includes a flexible API that allows developers to change the animation
 
 Download
 ===========
-Gradle dependency snippet:
+Grab via Gradle:
  ```
 compile 'bg.devlabs.flyingfab:library:<latest version>'
  ```
+or Maven:
+ ```
+<dependency>
+  <groupId>bg.devlabs.flyingfab</groupId>
+  <artifactId>library</artifactId>
+  <version><latest version></version>
+  <type>pom</type>
+</dependency> 
+ ```
+ 
 Requires the following two libraries to be imported:
  ```
 'org.jetbrains.kotlin:kotlin-stdlib-jre7:1.1.51'
@@ -95,7 +105,7 @@ Simona Stoyanova - [@sstoyanova](https://github.com/sstoyanova) on GitHub, @Simo
 
 License
 ========
-FlyingFab is released under the [MIT License](https://gitlab.com/SimonaStoyanova/flying-fab/blob/master/LICENSE) file for details.
+FlyingFab is released under the [MIT License](https://gitlab.com/SimonaStoyanova/flying-fab/blob/master/LICENSE).
 
 Disclaimer
 ========
