@@ -68,8 +68,15 @@ FlyingFab includes a flexible API that allows developers to change the animation
 
 Download
 ===========
-The download is still in progress.
-
+Gradle dependency snippet:
+ ```
+compile 'bg.devlabs.flyingfab:library:<latest version>'
+ ```
+Requires the following two libraries to be imported:
+ ```
+'org.jetbrains.kotlin:kotlin-stdlib-jre7:1.1.51'
+'com.android.support:design:26.1.0'
+ ```
 Samples
 ========
 Code samples are available in the app module.
