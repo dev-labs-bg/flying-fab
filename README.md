@@ -1,7 +1,7 @@
 FlyingFab
 ==============
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [ ![Download](https://api.bintray.com/packages/sstoyanova/flyingfab/flying-fab/images/download.svg?version=0.0.3) ](https://bintray.com/sstoyanova/flyingfab/flying-fab/0.0.3/link)
 
 FlyingFab is a small library for animating [FAB](https://developer.android.com/reference/android/support/design/widget/FloatingActionButton.html) as if it is "flying", written in Kotlin.
 
