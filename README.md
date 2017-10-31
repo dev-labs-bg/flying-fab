@@ -71,7 +71,7 @@ To report a specific problem or feature request, open a new issue on Github. For
 
 Author
 ========
-Simona Stoyanova - [@sstoyanova](https://github.com/sstoyanova) on GitHub, @SimonaStoyanova on Twitter
+Simona Stoyanova - [@sstoyanova](https://github.com/sstoyanova) on GitHub, [@SimonaStoyanova](https://twitter.com/SimonaStoyanova) on Twitter
 
 License
 ========
