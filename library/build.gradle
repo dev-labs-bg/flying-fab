@@ -1,9 +1,10 @@
 apply plugin: 'com.android.library'
-
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
 apply plugin: 'org.jetbrains.dokka-android'
+
+apply plugin: 'maven-publish'
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
@@ -21,169 +22,16 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
-
 dokka {
     outputFormat = 'html'
     outputDirectory = "$buildDir/javadoc"
 }
 
-ext {
-
-    //For bintray and jcenter distribution
-    bintrayRepo = 'flyingfab'
-    bintrayName = 'flying-fab'
-
-    publishedGroupId = 'bg.devlabs.flyingfab'
-    libraryName = 'FlyingFab'
-    artifact = 'library' //This artifact name should be the same with library module name
-
-    libraryDescription = 'FlyingFab is a small library for animating FAB as if it is "flying"'
-
-    siteUrl = 'https://github.com/sstoyanova/flying-fab'
-    gitUrl = 'https://github.com/sstoyanova/flying-fab.git'
-
-    libraryVersion = '1.0.0'
-
-    developerId = 'Simona'
-    developerName = 'Simona Stoyanova'
-    developerEmail = 'sstoyanova26@gmail.com'
-    organization = 'DevLabs' // if you push to organization's repository.
-    licenseName = 'MIT License'  //Example for license
-    licenseUrl = 'https://opensource.org/licenses/MIT'
-    allLicenses = ["MIT"]
-
-}
-//These two remote files contain Bintray configuration as described above.
-//apply from: 'https://raw.githubusercontent.com/quangctkm9207/template-files/master/android/gradle/install.gradle'
-apply plugin: 'com.github.dcendents.android-maven'
-
-group = publishedGroupId // Maven Group ID for the artifact
-
-install {
-    repositories.mavenInstaller {
-        // This generates POM.xml with proper parameters
-        pom.project {
-            packaging 'aar'
-            groupId publishedGroupId
-            artifactId artifact
-
-            // Add your description here
-            name libraryName
-            description libraryDescription
-            url siteUrl
-
-            // Set your license
-            licenses {
-                license {
-                    name licenseName
-                    url licenseUrl
-                }
-            }
-            developers {
-                developer {
-                    id developerId
-                    name developerName
-                    email developerEmail
-                }
-            }
-            scm {
-                connection gitUrl
-                developerConnection gitUrl
-                url siteUrl
-
-            }
-        }
-
-    }
-}
-//end
-
-//apply from: 'https://raw.githubusercontent.com/quangctkm9207/template-files/master/android/gradle/bintray.gradle'
-
-
-apply plugin: 'com.jfrog.bintray'
-
-version = libraryVersion
-
-/*
- * Comment the following part if you only want to distribute .aar files.
- * (For example, your source code is obfuscated by Proguard and is not shown to outsite developers)
- * Without source code .jar files, you only can publish on bintray respository but not jcenter.
- */
-
-/*--------------------------------*/
-if (project.hasProperty("kotlin")) { //Kotlin libraries
-    task sourcesJar(type: Jar) {
-        classifier = 'sources'
-        from android.sourceSets.main.java.srcDirs
-    }
-
-    task javadoc(type: Javadoc, dependsOn: dokka) {
-
-    }
-} else if (project.hasProperty("android")) {
-    task sourcesJar(type: Jar) {
-        classifier = 'sources'
-        from android.sourceSets.main.java.srcDirs
-    }
-
-    task javadoc(type: Javadoc) {
-        source = android.sourceSets.main.java.srcDirs
-        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    }
-} else { // Java libraries
-    task sourcesJar(type: Jar, dependsOn: classes) {
-        classifier = 'sources'
-        from sourceSets.main.allSource
-    }
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives javadocJar
-    archives sourcesJar
-}
-/*--------------------------------*/
-
-// Bintray
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
-bintray {
-    user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.apikey")
-
-    configurations = ['archives']
-    pkg {
-        repo = bintrayRepo
-        name = bintrayName
-        desc = libraryDescription
-        userOrg = organization   // If the repository is hosted by an organization instead of personal account.
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        licenses = allLicenses
-        publish = true
-        publicDownloadNumbers = true
-        version {
-            desc = libraryDescription
-            gpg {
-                sign = true
-                passphrase = properties.getProperty("bintray.gpg.password")
-            }
-        }
-    }
-}
-
-//end
 kapt {
     generateStubs = true
 }
@@ -205,3 +53,4 @@ dependencies {
      */
     compileOnly 'com.android.support:design:26.1.0'
 }
+apply from: 'deploy.gradle'
