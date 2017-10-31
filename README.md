@@ -17,76 +17,46 @@ override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_animated_fab)
         FlyingFab()
-                .interpolator(AccelerateDecelerateInterpolator()) //optional
-                .animationDuration(800L) //optional
-                .setup(app_bar_layout, fab_1)}
+                .interpolatorUp(AccelerateDecelerateInterpolator())
+                .interpolatorDown(BounceInterpolator())
+                .animationDurationUp(500L)
+                .animationDurationDown(1200L)
+                .setup(app_bar_layout, fab_1)
+        //...
+}
 ```
 
-FlyingFab includes a flexible API that allows developers to change the animation duration and TimeInterpolator. You just need to use the two methods below:
+FlyingFab includes a flexible API that allows developers to change the animation duration and TimeInterpolator for the up or/and down animations. You just need to use the methods below:
 
- ```
-/**
-     * Sets the interpolator for the underlying animator that animates the requested properties.
-     * By default, the animator uses the [FlyingFab.DEFAULT_TIME_INTERPOLATOR] interpolator.
-     * Calling this method will cause the declared interpolator to be used instead.
-     *
-     * @param interpolator The TimeInterpolator to be used for ensuing property animations. A value
-     * of <code>null</code> will result in [FlyingFab.DEFAULT_TIME_INTERPOLATOR] interpolation.
-     * @return This object, allowing calls to methods in this class to be chained.
-     *
-     * Known Indirect Subclasses of TimeInterpolator:
-     * AccelerateDecelerateInterpolator,AccelerateInterpolator,
-     * AnticipateInterpolator,AnticipateOvershootInterpolator,
-     * BaseInterpolator,BounceInterpolator,CycleInterpolator,
-     * DecelerateInterpolator,FastOutLinearInInterpolator,
-     * FastOutSlowInInterpolator,Interpolator,LinearInterpolator,
-     * LinearOutSlowInInterpolator,OvershootInterpolator,PathInterpolator
-     */
-    @Suppress("unused", "RedundantVisibilityModifier")
-    public fun interpolator(interpolator: TimeInterpolator?): FlyingFab {
-        this.interpolator = interpolator ?: DEFAULT_TIME_INTERPOLATOR
-        return this
-    }
-
-    /**
-     * Sets the duration of the animation in which the button is animated from top to bottom and reverse.
-     * By default, the duration is [FlyingFab.DEFAULT_ANIMATION_DURATION].
-     * Calling this method will cause the declared duration to be used instead.
-     *
-     * @param animationDuration The animation duration to be used for ensuing property animations. A value
-     * of <code>null</code> will result in [FlyingFab.DEFAULT_ANIMATION_DURATION].
-     * @return This object, allowing calls to methods in this class to be chained.
-     *
-     */
-    @Suppress("unused", "RedundantVisibilityModifier")
-    public fun animationDuration(animationDuration: Long?): FlyingFab {
-        this.animationDuration = animationDuration ?: DEFAULT_ANIMATION_DURATION
-        return this
-    }
 ```
+public fun interpolatorUp(interpolator: TimeInterpolator?): FlyingFab
+public fun interpolatorDown(interpolator: TimeInterpolator?): FlyingFab
+public fun animationDurationUp(animationDuration: Long?): FlyingFab
+public fun animationDurationDown(animationDuration: Long?): FlyingFab
 
+```
 
 Download
 ===========
 Grab via Gradle:
- ```
+```
 compile 'bg.devlabs.flyingfab:library:<latest version>'
  ```
 or Maven:
- ```
+```
 <dependency>
   <groupId>bg.devlabs.flyingfab</groupId>
   <artifactId>library</artifactId>
   <version><latest version></version>
   <type>pom</type>
 </dependency> 
- ```
+```
  
 Requires the following two libraries to be imported:
- ```
+```
 'org.jetbrains.kotlin:kotlin-stdlib-jre7:1.1.51'
 'com.android.support:design:26.1.0'
- ```
+```
 Samples
 ========
 Code samples are available in the app module.
