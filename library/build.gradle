@@ -5,10 +5,11 @@ apply plugin: 'com.jfrog.bintray'
 apply plugin: 'org.jetbrains.dokka-android'
 
 apply plugin: 'maven-publish'
+
+
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
-
 
     defaultConfig {
         minSdkVersion 14
@@ -47,7 +48,7 @@ dependencies {
 
     // The two libraries below are required and
     // should be included in the applications that use the FlyingFab library
-    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jre7:1.1.51"
+    compileOnly 'org.jetbrains.kotlin:kotlin-stdlib-jre7:1.1.51'
     /**
      * Support Design Library for android.support.design.widget.AppBarLayout access
      */

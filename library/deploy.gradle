@@ -1,14 +1,16 @@
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
+apply from: 'keystore.gradle'
 ext {
     siteUrl = 'https://github.com/sstoyanova/flying-fab/'
     gitUrl = 'https://github.com/sstoyanova/flying-fab/'
     groupId = 'bg.devlabs.flyingfab'
     artifactId = 'library'
     libname = "flying-fab" // actually not used
-    libVersion = "0.0.3" // actually not used
-}
+    libVersion = "0.0.4"
+    }
+
 version = libVersion
 group = groupId
 
@@ -31,8 +33,8 @@ install {
 }
 
 bintray {
-    user = 'your_bintray_user'
-    key = 'your_api_key'
+    user = 'sstoyanova'
+    key = bintray_key
     configurations = ['archives']
     pkg {
         repo = "flyingfab"
