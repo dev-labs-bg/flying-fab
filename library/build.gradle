@@ -3,22 +3,16 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'org.jetbrains.dokka-android'
-
 apply plugin: 'maven-publish'
-
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.2"
-
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -33,14 +27,6 @@ dokka {
     outputDirectory = "$buildDir/javadoc"
 }
 
-kapt {
-    generateStubs = true
-}
-kotlin {
-    experimental {
-        coroutines 'enable'
-    }
-}
 dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
