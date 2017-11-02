@@ -1,22 +1,28 @@
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
-apply from: 'keystore.gradle'//the file, containing the API key - bintray_key
+apply from: 'keystore.gradle'//the file, containing the bintray API key
 ext {
+    // This configuration will result in:
+    // compile '<groupId>:<artifactId>:<libVersion>'
     groupId = 'bg.devlabs.flyingfab' //your unique package
-    artifactId = "flying-fab"
-    libname = "flying-fab" // actually not used
-    libVersion = "0.0.5"
+    artifactId = "flying-fab" //important for library
+    libVersion = "0.0.6"
 }
 version = libVersion
 group = groupId
+//take a look at https://github.com/bintray/gradle-bintray-plugin#buildgradle
 bintray {
-    user = 'sstoyanova'
-    key = bintray_key
+    user = 'sstoyanova' // Your bintray User
+    key = bintray_key // Defined in keystore.gradle file
     configurations = ['archives']
+    publish = true //[Default: false] Whether version should be auto published after an upload
+    override = false //[Default: false] Whether to override version artifacts already published
+    // Package configuration. The plugin will use the repo and name properties to check if the
+    // package already exists. In that case, there's no need to configure the other package
+    // properties (like userOrg, desc, etc).
     pkg {
-        repo = "flyingfab"
-        name = libname
-        publish = true
+        repo = "flyingfab" //bintray repo
+        name = artifactId //bintray package
         version {
             name = libVersion
         }
@@ -29,7 +35,7 @@ install {
             groupId groupId
             artifactId artifactId
             version libVersion
-            name libname // pom.project.name must be same as bintray.pkg.name
+            name artifactId // pom.project.name must be same as bintray.pkg.name
         }
     }
 }
