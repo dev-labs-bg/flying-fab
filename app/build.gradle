@@ -36,5 +36,5 @@ dependencies {
      * Support Design Library for android.support.design.widget.AppBarLayout access
      */
     implementation 'com.android.support:design:26.1.0'
-    compile project(path: ':library')
+    implementation project(path: ':library')
 }
