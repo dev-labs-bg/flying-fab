@@ -1,19 +1,27 @@
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
-
-apply from: 'keystore.gradle'
+apply from: 'keystore.gradle'//the file, containing the API key - bintray_key
 ext {
-    siteUrl = 'https://github.com/sstoyanova/flying-fab/'
-    gitUrl = 'https://github.com/sstoyanova/flying-fab/'
-    groupId = 'bg.devlabs.flyingfab'
-    artifactId = 'library'
+    groupId = 'bg.devlabs.flyingfab' //your unique package
+    artifactId = "flying-fab"
     libname = "flying-fab" // actually not used
-    libVersion = "0.0.4"
-    }
-
+    libVersion = "0.0.5"
+}
 version = libVersion
 group = groupId
-
+bintray {
+    user = 'sstoyanova'
+    key = bintray_key
+    configurations = ['archives']
+    pkg {
+        repo = "flyingfab"
+        name = libname
+        publish = true
+        version {
+            name = libVersion
+        }
+    }
+}
 install {
     repositories.mavenInstaller {
         pom.project {
@@ -22,31 +30,11 @@ install {
             artifactId artifactId
             version libVersion
             name libname // pom.project.name must be same as bintray.pkg.name
-            url siteUrl
-            scm {
-                connection gitUrl
-                developerConnection gitUrl
-                url siteUrl
-            }
         }
     }
 }
 
-bintray {
-    user = 'sstoyanova'
-    key = bintray_key
-    configurations = ['archives']
-    pkg {
-        repo = "flyingfab"
-        name = libname
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        publish = true
-        version {
-            name = libVersion
-        }
-    }
-}
+//just copy paste the lines below
 if (project.hasProperty("kotlin")) { //Kotlin libraries
     task sourcesJar(type: Jar) {
         classifier = 'sources'
@@ -72,7 +60,6 @@ if (project.hasProperty("kotlin")) { //Kotlin libraries
         from sourceSets.main.allSource
     }
 }
-
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
