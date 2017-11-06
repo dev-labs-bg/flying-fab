@@ -6,7 +6,7 @@ ext {
     // compile '<groupId>:<artifactId>:<libVersion>'
     groupId = 'bg.devlabs.flyingfab' //your unique package
     artifactId = "flying-fab" //important for library
-    libVersion = "0.0.6"
+    libVersion = "0.0.7"
 }
 version = libVersion
 group = groupId
