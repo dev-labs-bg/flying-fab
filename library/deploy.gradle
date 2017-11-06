@@ -4,9 +4,9 @@ apply from: 'keystore.gradle'//the file, containing the bintray API key
 ext {
     // This configuration will result in:
     // compile '<groupId>:<artifactId>:<libVersion>'
-    groupId = 'bg.devlabs.flyingfab' //your unique package
-    artifactId = "flying-fab" //important for library
-    libVersion = "0.0.7"
+    groupId = 'bg.devlabs.flyingfab' // package name of the project
+    artifactId = "library" // module name of the library
+    libVersion = "0.0.5"
 }
 version = libVersion
 group = groupId
@@ -22,7 +22,7 @@ bintray {
     // properties (like userOrg, desc, etc).
     pkg {
         repo = "flyingfab" //bintray repo
-        name = artifactId //bintray package
+        name = "flying-fab" //bintray package
         version {
             name = libVersion
         }
