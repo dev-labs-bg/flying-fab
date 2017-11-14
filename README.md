@@ -16,12 +16,8 @@ The interface is pretty simple to use. You just need to pass the AppBarLayout an
 override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_animated_fab)
-        FlyingFab()
-                .interpolatorUp(AccelerateDecelerateInterpolator())
-                .interpolatorDown(BounceInterpolator())
-                .animationDurationUp(500L)
-                .animationDurationDown(1200L)
-                .setup(app_bar_layout, fab_1)
+        
+        FlyingFab().setup(app_bar_layout, fab_1)
         //...
 }
 ```
